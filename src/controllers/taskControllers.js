@@ -65,8 +65,25 @@ async function putTask(req, res) {
     } catch (error) {
         res.status(500).json({ error: error })
     }
-}
+};
+
+//  Deletar task 
+async function deleteTask(req, res) {
+    const id = req.params.id
+    const task = await taskSchema.findOne({ _id: id })
+    if (!task) {
+        res.status(422).json({ message: 'A task não foi encontrada' })
+    } else {
+
+        try {
+            await taskSchema.deleteOne({ _id: id })
+            res.status(200).json({ message: 'Task removida com sucesso' })
+        } catch (error) {
+            res.status(500).json({ error: error })
+        }
+    }
+};
 
 
 
-module.exports = { createTask, getTasks, getTaskId, putTask }; 
+module.exports = { createTask, getTasks, getTaskId, putTask, deleteTask }; 
