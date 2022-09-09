@@ -1,12 +1,28 @@
 {
   "name": "projetofinal",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon -r dotenv/config src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.0",
+    "nodemon": "^2.0.19"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gicordone/APIprojetofinal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gicordone/APIprojetofinal/issues"
+  },
+  "homepage": "https://github.com/gicordone/APIprojetofinal#readme",
+  "description": ""
 }
