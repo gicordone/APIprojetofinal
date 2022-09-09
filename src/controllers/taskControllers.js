@@ -23,7 +23,18 @@ async function createTask(req, res) {
     }
 };
 
+// Listar tasks
+async function getTasks(req, res) {
+    try {
+        const task = await taskSchema.find()
+        res.status(200).json(task)
+
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+};
 
 
 
-module.exports = { createTask }; 
+
+module.exports = { createTask, getTasks }; 
