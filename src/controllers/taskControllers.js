@@ -47,7 +47,26 @@ async function getTaskId(req, res) {
             res.status(500).json({ error: error })
         }};
 
+// Atualizar task
+async function putTask(req, res) {
+    const id = req.params.id;
+    const { description, role, done } = req.body
+    const task = {
+        description,
+        role,
+        done
+    }
+    try {
+        await taskSchema.updateOne(task)
+        if (task.matchedCount === 0) {
+            res.status(422).json({ message: 'A task não foi encontrada' })
+        }
+        res.status(200).json(task)
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+}
 
 
 
-module.exports = { createTask, getTasks, getTaskId }; 
+module.exports = { createTask, getTasks, getTaskId, putTask }; 
