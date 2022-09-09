@@ -33,6 +33,18 @@ async function getUsers(req, res) {
         res.status(500).json({ error: error })
     }
 };
+
+async function getUserId (req, res) {
+    const id = req.params.id;
+    try {
+        const user = await userSchema.findOne({ _id: id })
+        if (!user) {
+            res.status(422).json({ message: 'User não encontrada' })
+        } res.status(200).json(user)
+        } catch (error) {
+            res.status(500).json({ error: error })
+        }};
+    
     
 
 
@@ -44,4 +56,4 @@ async function getUsers(req, res) {
 
 
 
-module.exports = { createUser, getUsers }; 
+module.exports = { createUser, getUsers, getUserId }; 
