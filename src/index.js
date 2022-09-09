@@ -17,9 +17,9 @@ app.use('/task', taskRoutes);
 
 // mongodb connection
 mongoose
-.connect(process.env.MONGODB_URI)
-.then(() => console.log('Connected to Mongodb Atlas'))
-.catch((error) => console.error(error));
+    .connect(process.env.MONGODB_URI)
+    .then(() => console.log('Connected to Mongodb Atlas'))
+    .catch((error) => console.error(error));
 
 //entregando port
 app.listen(port, () => console.log('server listening on port', port));

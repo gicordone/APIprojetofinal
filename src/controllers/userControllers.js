@@ -34,46 +34,54 @@ async function getUsers(req, res) {
     }
 };
 
-async function getUserId (req, res) {
+async function getUserId(req, res) {
     const id = req.params.id;
     try {
         const user = await userSchema.findOne({ _id: id })
         if (!user) {
             res.status(422).json({ message: 'User não encontrada' })
         } res.status(200).json(user)
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+};
+
+async function putUser(req, res) {
+    const id = req.params.id;
+    const { name, age, telephone, email, role } = req.body
+    const user = {
+        name,
+        age,
+        telephone,
+        email,
+        role
+    }
+    try {
+        await userSchema.updateOne(user)
+        if (user.matchedCount === 0) {
+            res.status(422).json({ message: 'O user não foi encontrado' })
+        }
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+};
+
+async function deleteUser(req, res) {
+    const id = req.params.id
+    const user = await userSchema.findOne({ _id: id })
+    if (!user) {
+        res.status(422).json({ message: 'O user não foi encontrado' })
+    } else {
+
+        try {
+            await userSchema.deleteOne({ _id: id })
+            res.status(200).json({ message: 'User removido com sucesso' })
         } catch (error) {
             res.status(500).json({ error: error })
-        }};
-    
-        async function putUser(req, res) {
-            const id = req.params.id;
-            const { name, age, telephone, email, role } = req.body
-            const user = {
-                name,
-                age,
-                telephone,
-                email,
-                role
-            }
-            try {
-                await userSchema.updateOne(user)
-                if (user.matchedCount === 0) {
-                    res.status(422).json({ message: 'O user não foi encontrado' })
-                }
-                res.status(200).json(user)
-            } catch (error) {
-                res.status(500).json({ error: error })
-            }
-        };
-    
+        }
+    }
+};
 
 
-
-
-
-
-
-
-
-
-module.exports = { createUser, getUsers, getUserId, putUser }; 
+module.exports = { createUser, getUsers, getUserId, putUser, deleteUser }; 
