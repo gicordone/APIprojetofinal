@@ -24,6 +24,16 @@ async function createUser(req, res) {
     }
 };
 
+async function getUsers(req, res) {
+    try {
+        const user = await userSchema.find()
+        res.status(200).json(user)
+
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+};
+    
 
 
 
@@ -33,4 +43,5 @@ async function createUser(req, res) {
 
 
 
-module.exports = { createUser }; 
+
+module.exports = { createUser, getUsers }; 
