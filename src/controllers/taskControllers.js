@@ -34,7 +34,20 @@ async function getTasks(req, res) {
     }
 };
 
+// Get task por id  
+async function getTaskId(req, res) {
+    const id = req.params.id;
+    
+    try {
+        const task = await taskSchema.findOne({ _id: id })
+        if (!task) {
+            res.status(422).json({ message: 'Task não encontrada' })
+        } res.status(200).json(task)
+        } catch (error) {
+            res.status(500).json({ error: error })
+        }};
 
 
 
-module.exports = { createTask, getTasks }; 
+
+module.exports = { createTask, getTasks, getTaskId }; 

@@ -9,4 +9,6 @@ router.post('/novouser', createUser);
 // Listar users
 router.get('/', getUsers);
 
+
+
 module.exports = router
