@@ -2,16 +2,17 @@ const taskSchema = require('../models/Task')
 
 // Criação de task
 async function createTask(req, res) {
-    const { description, role, done } = req.body
+    const { description, role, done, user } = req.body
 
-    if (!description || !role || done === "") {
+    if (!description || !role || done === "" || !user) {
         res.status(400).send("Por favor, preencher o campo")
     }
     else {
         const task = {
             description,
             role,
-            done
+            done,
+            user
         }
         try {
             await taskSchema.create(task)
@@ -26,7 +27,8 @@ async function createTask(req, res) {
 // Listar tasks
 async function getTasks(req, res) {
     try {
-        const task = await taskSchema.find()
+        const task = await taskSchema.find().populate('user') 
+        // o parametro de populate() é o *ATRIBUTO* relacionado
         res.status(200).json(task)
 
     } catch (error) {
@@ -51,11 +53,12 @@ async function getTaskId(req, res) {
 // Atualizar task
 async function putTask(req, res) {
     const id = req.params.id;
-    const { description, role, done } = req.body
+    const { description, role, done, user } = req.body
     const task = {
         description,
         role,
-        done
+        done,
+        user
     }
     try {
         await taskSchema.updateOne(task)

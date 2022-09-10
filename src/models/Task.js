@@ -13,7 +13,13 @@ const taskSchema = mongoose.Schema(
         done: {
             type: Boolean,
             required: true
+        },
+        user: {
+            type: mongoose.ObjectId,
+            ref: 'User',
+            required: true
         }
+
     }
 );
 
