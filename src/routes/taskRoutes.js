@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const { createTask, getTasks, getTaskId, putTask, deleteTask } = require('../controllers/taskControllers');
+const { createTask, getTasks, getTaskId, getTaskWithUser, putTask, deleteTask } = require('../controllers/taskControllers');
 
 // Criação de task
 router.post('/novatask', createTask);
 
 // Listar tasks
 router.get('/', getTasks);
+
+// Listar tasks com users
+router.get('/taskeuser', getTaskWithUser);
 
 // Get task por id  
 router.get('/:id', getTaskId);

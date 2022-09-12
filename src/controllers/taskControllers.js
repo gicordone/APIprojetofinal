@@ -27,6 +27,17 @@ async function createTask(req, res) {
 // Listar tasks
 async function getTasks(req, res) {
     try {
+        const task = await taskSchema.find()
+        res.status(200).json(task)
+
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+};
+
+// Listar tasks com users
+async function getTaskWithUser(req, res) {
+    try {
         const task = await taskSchema.find().populate('user') 
         // o parametro de populate() é o *ATRIBUTO* relacionado
         res.status(200).json(task)
@@ -39,15 +50,16 @@ async function getTasks(req, res) {
 // Get task por id  
 async function getTaskId(req, res) {
     const id = req.params.id;
-
+    if (!id) {
+        res.status(422).json({ message: 'Task não encontrada' })
+    } else {
     try {
         const task = await taskSchema.findOne({ _id: id })
-        if (!task) {
-            res.status(422).json({ message: 'Task não encontrada' })
-        } res.status(200).json(task)
+        res.status(200).json(task)
     } catch (error) {
         res.status(500).json({ error: error })
     }
+}
 };
 
 // Atualizar task
@@ -90,4 +102,4 @@ async function deleteTask(req, res) {
 
 
 
-module.exports = { createTask, getTasks, getTaskId, putTask, deleteTask }; 
+module.exports = { createTask, getTasks, getTaskId, getTaskWithUser, putTask, deleteTask }; 
