@@ -35,15 +35,32 @@ async function getTasks(req, res) {
     }
 };
 
-// Listar tasks com users
+// Listar todas as tasks e users
 async function getTaskWithUser(req, res) {
     try {
-        const task = await taskSchema.find().populate('user') 
+        const task = await taskSchema.find().populate('user')
         // o parametro de populate() é o *ATRIBUTO* relacionado
         res.status(200).json(task)
 
     } catch (error) {
         res.status(500).json({ error: error })
+    }
+};
+
+// Listar task-id com usuario
+async function getTaskIdWithUser(req, res) {
+    const id = req.params.id
+    if (!id) {
+        res.status(422).json({ message: 'colocar id' })
+    } else {
+        try {
+            const task = await taskSchema.find({ _id: id }).populate('user')
+            // o parametro de populate() é o *ATRIBUTO* relacionado
+            res.status(200).json(task)
+
+        } catch (error) {
+            res.status(500).json({ error: error })
+        }
     }
 };
 
@@ -53,13 +70,13 @@ async function getTaskId(req, res) {
     if (!id) {
         res.status(422).json({ message: 'Task não encontrada' })
     } else {
-    try {
-        const task = await taskSchema.findOne({ _id: id })
-        res.status(200).json(task)
-    } catch (error) {
-        res.status(500).json({ error: error })
+        try {
+            const task = await taskSchema.findOne({ _id: id })
+            res.status(200).json(task)
+        } catch (error) {
+            res.status(500).json({ error: error })
+        }
     }
-}
 };
 
 // Atualizar task
@@ -102,4 +119,4 @@ async function deleteTask(req, res) {
 
 
 
-module.exports = { createTask, getTasks, getTaskId, getTaskWithUser, putTask, deleteTask }; 
+module.exports = { createTask, getTasks, getTaskId, getTaskWithUser, getTaskIdWithUser, putTask, deleteTask }; 
