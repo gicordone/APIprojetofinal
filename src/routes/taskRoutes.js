@@ -23,6 +23,8 @@ const { createTask, getTasks, getTaskId, getTaskWithUser, getTaskIdWithUser, put
  *                          done: 
  *                              type: boolean
  *                          user: 
+ *                              type: string
+ *                  required: true
  *          200:
  *              description: Task criada com sucesso
  */
