@@ -72,6 +72,24 @@ router.get('/user/:id', getUserId);
 router.put('/:id', putUser);
 
 // Deletar user
+/**
+ * @swagger
+ * /user/{id}:
+ *  delete:
+ *      description: deletar user
+ *      tags: [User]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:  
+ *              type: string
+ *          required: true 
+ *      responses:
+ *          200:
+ *              description: user deletado
+ *          422:
+ *              description: user não encontrada
+ */
 router.delete('/:id', deleteUser);
 
 
