@@ -102,7 +102,37 @@ router.get('/taskeuser', getTaskWithUser);
 router.get('/taskideuser/:id', getTaskIdWithUser);
 
 // Atualizar task
-
+/**
+ * @swagger
+ * /task/{id}:
+ *  put:
+ *      description: atualizar task
+ *      tags: [Task]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:  
+ *              type: string
+ *          required: true
+ *      requestBody:
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      properties:
+ *                          description: 
+ *                              type: string
+ *                          role:
+ *                              type: string 
+ *                          done: 
+ *                              type: boolean
+ *                          user: 
+ *                              type: string
+ *      responses:
+ *          200:
+ *              description: task atualizada
+ *          422:
+ *              description: task não encontrada
+ */
 router.put('/:id', putTask);
 
 // Deletar task

@@ -84,18 +84,14 @@ async function getTaskIdWithUser(req, res) {
 async function putTask(req, res) {
     const id = req.params.id;
     const { description, role, done, user } = req.body
-    const task = {
-        description,
-        role,
-        done,
-        user
-    }
+    
     try {
-        await taskSchema.updateOne(task)
+        const task = await taskSchema.updateOne({ _id: id },{description, role, done, user})
         if (task.matchedCount === 0) {
             res.status(422).json({ message: 'A task não foi encontrada' })
         }
-        res.status(200).json(task)
+        const newTask = await taskSchema.find({ _id: id })
+        res.status(200).json(newTask)
     } catch (error) {
         res.status(500).json({ error: error })
     }
