@@ -28,5 +28,5 @@
     "url": "https://github.com/gicordone/APIprojetofinal/issues"
   },
   "homepage": "https://github.com/gicordone/APIprojetofinal#readme",
-  "description": ""
+  "description": "API de lista de tarefas -  com NodeJS Express e banco de dados MongoDB"
 }

@@ -3,39 +3,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const swaggerUi = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerJsDoc = require('./swagger');
+const path = require('path');
 
+//  settings
 const app = express();
 const port = process.env.PORT || 3000;
 
 const userRoutes = require('./routes/userRoutes')
-const taskRoutes = require('./routes/taskRoutes')
-
-const options = {
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'API Projeto Final',
-            version: '1.0.0',
-            description: 'API REST de Lista de Tarefas - Operações CRUD'
-        },
-        servers: [
-            {
-                url: 'http://localhost:3000'
-            }
-        ],
-    },
-    apis: ['./routes/*.js']
-};
-
-
-const specs = swaggerJsDoc(options)
+const taskRoutes = require('./routes/taskRoutes');
+const { options } = require('./routes/userRoutes');
 
 //middleware
 app.use(express.json())
 app.use('/user', userRoutes);
 app.use('/task', taskRoutes);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(options)));
 
 // mongodb connection
 mongoose
