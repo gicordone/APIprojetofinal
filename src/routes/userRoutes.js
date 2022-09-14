@@ -49,7 +49,7 @@ router.get('/', getUsers);
 // Get user por id  
 /**
  * @swagger
- * /user/{id}:
+ * /user/user/{id}:
  *  get:
  *      description: user por id
  *      tags: [User]
@@ -65,7 +65,7 @@ router.get('/', getUsers);
  *          422:
  *              description: user não encontrada
  */
-router.get('/:id', getUserId);
+router.get('/user/:id', getUserId);
 
 // Atualizar user
 

@@ -11,7 +11,6 @@ const { createTask, getTasks, getTaskId, getTaskWithUser, getTaskIdWithUser, put
  *      summary: criação de task
  *      tags: [Task]
  *      requestBody: 
- *          required: true
  *          content:
  *              application/json:
  *                  schema:
@@ -24,9 +23,10 @@ const { createTask, getTasks, getTaskId, getTaskWithUser, getTaskIdWithUser, put
  *                              type: boolean
  *                          user: 
  *                              type: string
- *                  required: true
- *          200:
- *              description: Task criada com sucesso
+ *      required: true
+ *      responses:
+ *        200:
+ *          description: Task criada com sucesso
  */
 router.post('/novatask', createTask);
 
@@ -47,7 +47,7 @@ router.get('/', getTasks);
 // Get task por id  
 /**
  * @swagger
- * /task/{id}:
+ * /task/task/{id}:
  *  get:
  *      description: task por id
  *      tags: [Task]
@@ -63,9 +63,21 @@ router.get('/', getTasks);
  *          422:
  *              description: task não encontrada
  */
-router.get('/:id', getTaskId);
+router.get('/task/:id', getTaskId);
 
 // Listar todas as tasks e users
+/**
+ * @swagger
+ * /task/taskeuser:
+ *  get:
+ *      description: Listar tasks e users
+ *      tags: [Task]
+ *      responses:
+ *          200:
+ *              description: tasks encontradas
+ *          422:
+ *              description: tasks não encontradas
+ */
 router.get('/taskeuser', getTaskWithUser);
 
 // Listar task-id com usuario
