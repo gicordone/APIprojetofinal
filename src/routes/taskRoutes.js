@@ -31,6 +31,17 @@ const { createTask, getTasks, getTaskId, getTaskWithUser, getTaskIdWithUser, put
 router.post('/novatask', createTask);
 
 //  Listar tasks
+/**
+ * @swagger
+ * /task:
+ *  get:
+ *    description: Listar tasks
+ *    tags: [Task]
+ *    responses:
+ *      "200":
+ *        description: otima resposta
+ *  */
+ 
 router.get('/', getTasks);
 
 // Get task por id  
