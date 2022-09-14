@@ -34,6 +34,16 @@ const { createUser, getUsers, getUserId, putUser, deleteUser } = require('../con
 router.post('/novouser', createUser);
 
 // Listar users
+/**
+ * @swagger
+ * /user:
+ *  get:
+ *    description: Listar users
+ *    tags: [User]
+ *    responses:
+ *      "200":
+ *        description: otima resposta
+ *  */
 router.get('/', getUsers);
 
 // Get user por id  
