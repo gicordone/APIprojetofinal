@@ -16,7 +16,7 @@ async function createTask(req, res) {
         }
         try {
             await taskSchema.create(task)
-            res.status(201).json({ message: 'Task criada com sucesso' })
+            res.status(200).json({ message: 'Task criada com sucesso' })
 
         } catch (error) {
             res.status(500).json({ error: error })
@@ -34,6 +34,22 @@ async function getTasks(req, res) {
         res.status(500).json({ error: error })
     }
 };
+
+// Get task por id  
+async function getTaskId(req, res) {
+    const id = req.params.id;
+    if (!id) {
+        res.status(422).json({ message: 'Task não encontrada' })
+    } else {
+        try {
+            const task = await taskSchema.findOne({ _id: id })
+            res.status(200).json(task)
+        } catch (error) {
+            res.status(500).json({ error: error })
+        }
+    }
+};
+
 
 // Listar todas as tasks e users
 async function getTaskWithUser(req, res) {
@@ -58,21 +74,6 @@ async function getTaskIdWithUser(req, res) {
             // o parametro de populate() é o *ATRIBUTO* relacionado
             res.status(200).json(task)
 
-        } catch (error) {
-            res.status(500).json({ error: error })
-        }
-    }
-};
-
-// Get task por id  
-async function getTaskId(req, res) {
-    const id = req.params.id;
-    if (!id) {
-        res.status(422).json({ message: 'Task não encontrada' })
-    } else {
-        try {
-            const task = await taskSchema.findOne({ _id: id })
-            res.status(200).json(task)
         } catch (error) {
             res.status(500).json({ error: error })
         }

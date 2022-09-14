@@ -2,16 +2,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const userRoutes = require('./routes/userRoutes')
+const taskRoutes = require('./routes/taskRoutes')
+const path = require('path');
+
+// swagger 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-const userRoutes = require('./routes/userRoutes')
-const taskRoutes = require('./routes/taskRoutes')
-
-const options = {
+const swaggerSpec = {
     definition: {
         openapi: '3.0.0',
         info: {
@@ -23,19 +22,20 @@ const options = {
             {
                 url: 'http://localhost:3000'
             }
-        ],
+        ]
     },
-    apis: ['./routes/*.js']
+    apis: [`${path.join(__dirname, './routes/*.js')}`]
 };
 
+// settings
+const app = express();
+const port = process.env.PORT || 3000;
 
-const specs = swaggerJsDoc(options)
-
-//middleware
+//middleware`
 app.use(express.json())
 app.use('/user', userRoutes);
 app.use('/task', taskRoutes);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(swaggerSpec)));
 
 // mongodb connection
 mongoose
