@@ -81,6 +81,24 @@ router.get('/task/:id', getTaskId);
 router.get('/taskeuser', getTaskWithUser);
 
 // Listar task-id com usuario
+/**
+ * @swagger
+ * /task/taskideuser/{id}:
+ *  get:
+ *      description: Listar task pro id e user
+ *      tags: [Task]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:  
+ *              type: string
+ *          required: true 
+ *      responses:
+ *          200:
+ *              description: task encontrada 
+ *          422:
+ *              description: task não encontrada
+ */
 router.get('/taskideuser/:id', getTaskIdWithUser);
 
 // Atualizar task
