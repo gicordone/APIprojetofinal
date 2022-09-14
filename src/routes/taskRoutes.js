@@ -38,13 +38,31 @@ router.post('/novatask', createTask);
  *    description: Listar tasks
  *    tags: [Task]
  *    responses:
- *      "200":
+ *      200:
  *        description: otima resposta
  *  */
  
 router.get('/', getTasks);
 
 // Get task por id  
+/**
+ * @swagger
+ * /task/{id}:
+ *  get:
+ *      description: task por id
+ *      tags: [Task]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:  
+ *              type: string
+ *          required: true 
+ *      responses:
+ *          200:
+ *              description: task encontrada 
+ *          422:
+ *              description: task não encontrada
+ */
 router.get('/:id', getTaskId);
 
 // Listar todas as tasks e users

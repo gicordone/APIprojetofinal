@@ -50,6 +50,7 @@ router.get('/', getUsers);
 router.get('/:id', getUserId);
 
 // Atualizar user
+
 router.put('/:id', putUser);
 
 // Deletar user
