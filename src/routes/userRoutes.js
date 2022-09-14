@@ -47,6 +47,24 @@ router.post('/novouser', createUser);
 router.get('/', getUsers);
 
 // Get user por id  
+/**
+ * @swagger
+ * /user/{id}:
+ *  get:
+ *      description: user por id
+ *      tags: [User]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:  
+ *              type: string
+ *          required: true 
+ *      responses:
+ *          200:
+ *              description: user encontrada 
+ *          422:
+ *              description: user não encontrada
+ */
 router.get('/:id', getUserId);
 
 // Atualizar user
