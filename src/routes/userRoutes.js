@@ -68,6 +68,39 @@ router.get('/', getUsers);
 router.get('/user/:id', getUserId);
 
 // Atualizar user
+/**
+ * @swagger
+ * /user/{id}:
+ *  put:
+ *      description: atualizar user
+ *      tags: [User]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:  
+ *              type: string
+ *          required: true
+ *      requestBody:
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      properties:
+ *                          name: 
+ *                              type: string
+ *                          age: 
+ *                              type: number 
+ *                          telephone: 
+ *                              type: number
+ *                          email: 
+ *                              type: string
+ *                          role:
+ *                              type: string
+ *      responses:
+ *          200:
+ *              description: user atualizado
+ *          422:
+ *              description: user não encontrado
+ */
 
 router.put('/:id', putUser);
 
