@@ -49,19 +49,13 @@ async function getUserId(req, res) {
 async function putUser(req, res) {
     const id = req.params.id;
     const { name, age, telephone, email, role } = req.body
-    const user = {
-        name,
-        age,
-        telephone,
-        email,
-        role
-    }
     try {
-        await userSchema.updateOne(user)
+        const user = await userSchema.updateOne({ _id: id },{ name, age, telephone, email, role })
         if (user.matchedCount === 0) {
             res.status(422).json({ message: 'O user não foi encontrado' })
         }
-        res.status(200).json(user)
+        const newUser = await userSchema.find({ _id: id })
+        res.status(200).json(newUser)
     } catch (error) {
         res.status(500).json({ error: error })
     }

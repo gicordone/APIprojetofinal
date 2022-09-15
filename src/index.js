@@ -23,7 +23,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(options)));
 // mongodb connection
 mongoose
     .connect(process.env.MONGODB_URI)
-    .then(() => console.log('Connected to Mongodb Atlas'))
+    .then(() => console.log('Connected to Mongodb Atlas projeto final'))
     .catch((error) => console.error(error));
 
 //entregando port
