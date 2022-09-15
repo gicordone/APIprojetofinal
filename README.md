@@ -12,18 +12,18 @@
 /user/ GET Todos os usuarios
 /users/:id GET Lista usuario por ID
 
-User
-POST: /user/novouser Criar usuario
-GET: /user Listar todos os usuarios 
-GET /user/user/:id Listar usuario por id
-PUT: /user/:id Atualizar usuario 
-DELETE: /user/:id Deletar usuario
+- User
+- POST: /user/novouser Criar usuario
+- GET: /user Listar todos os usuarios 
+- GET /user/user/:id Listar usuario por id
+- PUT: /user/:id Atualizar usuario 
+- DELETE: /user/:id Deletar usuario
 
-Task
-POST: /task/novatask Criar task
-GET: /task Listar todos as tasks 
-GET /task/task/:id Listar task por id
-GET: /task/taskeuser Listar tasks e users
-GET: /task/taskideuser/:id Listar task por id e user
-PUT: /task/:id Atualizar task 
-DELETE: /task/:id Deletar task
+- Task
+- POST: /task/novatask Criar task
+- GET: /task Listar todos as tasks 
+- GET /task/task/:id Listar task por id
+- GET: /task/taskeuser Listar tasks e users
+- GET: /task/taskideuser/:id Listar task por id e user
+- PUT: /task/:id Atualizar task 
+- DELETE: /task/:id Deletar task
